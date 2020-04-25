@@ -29,12 +29,16 @@ cities = [[23,45],[30,40],
           [13,36],[64,56],
           [61,67],[10,10]]
 n = int(input("Masukkan jumlah kota (1-7) : "))
+
 x = []
 y = []
+x.append(0)
+y.append(0)
+
 t0 = time.perf_counter()
 
 for k in range(1,n+1):
-    y.append(k)
+    x.append(k)
     
     tour = random.sample(range(k),k) #Generate SATU Rute perjalanan
     generateTour = list(itertools.permutations(tour)) #Membuat SEMUA Rute Perjalanan yang memungkinkan
@@ -46,11 +50,13 @@ for k in range(1,n+1):
         if j<jarakTerpendek:
             jarakTerpendek = int(j)
             ruteTerpendek = i
-    x.append(time.perf_counter()-t0)
+    y.append(time.perf_counter()-t0)
     print("Jarak terpendek",k,"kota yaitu",jarakTerpendek,"KM")
     print("    Dengan Rute :",generateTour[i])
 
 fig, ax = plt.subplots()
 ax.plot(x,y,'ro-')
-ax.set(xlabel = 'Waktu (t)',ylabel = 'N Kota')
+ax.set(xlabel = 'Number of Cities',ylabel = 'Times (s)')
+ax.set(xticks = list(range(0,7)))
+ax.grid()
 plt.show()
